@@ -9,6 +9,7 @@ import { Accounts } from "./Accounts";
 import { Chain } from "./Chain";
 import { ConnectWithSelect } from "./ConnectWithSelect";
 import Button from "@mui/material/Button";
+import { Dispatch, SetStateAction } from "react";
 // import { Status } from "./Status";
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
   isActivating: ReturnType<Web3ReactHooks["useIsActivating"]>;
   isActive: ReturnType<Web3ReactHooks["useIsActive"]>;
   error: Error | undefined;
-  setError: (error: Error | undefined) => void;
+  setError: any; //(error: Error | undefined) => void | Dispatch<SetStateAction<any>>;
   ENSNames: ReturnType<Web3ReactHooks["useENSNames"]>;
   provider?: ReturnType<Web3ReactHooks["useProvider"]>;
   accounts?: string[];

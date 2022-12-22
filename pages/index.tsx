@@ -42,7 +42,7 @@ const Right: NextPage = () => {
         <WalletBtn />
       </div>
       {/* 搜索区域 */}
-      <div className="flex justify-center mt-122">
+      <div className="flex justify-center m-auto mt-122 w-[70%]">
         <TextField
           label="注域名先查询，请输入域名，如：cambio"
           variant="outlined"
@@ -60,7 +60,7 @@ const Right: NextPage = () => {
         </div>
       </div>
       {/* 结果区域 */}
-      <div className="border w-[67%] m-auto mt-65">
+      <div className="border w-[70%] m-auto mt-65">
         {searchRes.map((item, index) => {
           return (
             <div key={`${item.name}-${index}`}>

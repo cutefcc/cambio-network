@@ -1,6 +1,13 @@
-import type { NextPage } from "next";
+// import type { NextPage } from "next";
 
-const SearchResultItem: NextPage = (props) => {
+interface Props {
+  data: {
+    name: string;
+    type: string;
+  };
+}
+
+const SearchResultItem = (props: Props) => {
   const {
     data: { name, type },
   } = props;

@@ -24,9 +24,10 @@ const useStore = create(store);
 const Right: NextPage = () => {
   const lists = [
     {
-      name: "cambio.cam",
-      record: "27",
-      status: "使用中",
+      type: "Web2 CNAME",
+      value: "XXXXXXXXXX",
+      ttl: "10分钟",
+      status: "正常",
     },
   ];
   const style = {
@@ -38,10 +39,18 @@ const Right: NextPage = () => {
     bgcolor: "background.paper",
     p: 4,
   };
-  const [domain, setDomain] = useState("1");
+  const [type, setType] = useState("1");
+  const [subType, setSubType] = useState("1");
+  const [ttl, setTtl] = useState("1");
   const [open, setOpen] = useState(false);
-  const handleDomainChange = (event: SelectChangeEvent) => {
-    setDomain(event.target.value);
+  const handleTypeChange = (event: SelectChangeEvent) => {
+    setType(event.target.value);
+  };
+  const handleSubTypeChange = (event: SelectChangeEvent) => {
+    setSubType(event.target.value);
+  };
+  const handleTtlChange = (event: SelectChangeEvent) => {
+    setTtl(event.target.value);
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,38 +67,35 @@ const Right: NextPage = () => {
             className="rounded-[4px] bg-[#196ad4]"
             onClick={handleOpen}
           >
-            添加域名
+            创建记录
           </Button>
         </div>
       </div>
       {/* 域名管理列表 */}
       <div className="mt-32 ml-60 border-l border-r">
         <div className="h-68 leading-[68px] flex bg-[#EFEFEF] text-[14px] text-[#101010] border-b">
-          <div className="w-[30%] pl-50">域名</div>
-          <div className="w-[30%] pl-50">记录数</div>
-          <div className="w-[30%] pl-50">DNS服务器状态</div>
-          <div className="w-[30%] pl-50">操作</div>
+          <div className="w-[20%] pl-50">记录类型</div>
+          <div className="w-[20%] pl-50">记录值</div>
+          <div className="w-[20%] pl-50">TTL</div>
+          <div className="w-[20%] pl-50">状态</div>
+          <div className="w-[20%] pl-50">操作</div>
         </div>
         <div>
-          {lists.map((item) => {
+          {lists.map((item, index) => {
             return (
               <div
-                key={item.name}
+                key={item.value}
                 className="h-68 leading-[68px] flex text-[14px] border-b"
               >
-                <div className="w-[30%] pl-50">{item.name}</div>
-                <div className={`w-[30%] pl-50`}>{item.record}</div>
-                <div className={`w-[30%] pl-50`}>正常</div>
-                <div className="w-[30%] pl-50 flex">
-                  <div
-                    className="w-90 text-[#1890FF] cursor-pointer"
-                    onClick={() => {
-                      Router.push("/addRecord");
-                    }}
-                  >
-                    添加记录
-                  </div>
-
+                <div className="w-[20%] pl-50">{item.type}</div>
+                <div className={`w-[20%] pl-50`}>{item.value}</div>
+                <div className={`w-[20%] pl-50`}>{item.ttl}</div>
+                <div className={`w-[20%] pl-50 text-[#70BF5B]`}>
+                  {item.status}
+                </div>
+                <div className="w-[20%] pl-50 flex">
+                  <div className="w-90 text-[#1890FF] cursor-pointer">修改</div>
+                  <div className="w-90 text-[#BD3124] cursor-pointer">暂停</div>
                   <div className="w-90 text-[#BD3124] cursor-pointer">删除</div>
                 </div>
               </div>
@@ -108,25 +114,61 @@ const Right: NextPage = () => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            选择域名
+            新增数据源
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <div className="mb-32 flex">
+            <div className="mb-32 flex items-center">
+              <div>记录类型：</div>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={domain}
-                label="选择已有域名"
+                value={type}
+                // label="选择已有域名"
                 size="small"
-                className="w-[100%]"
-                onChange={handleDomainChange}
+                className="w-102"
+                onChange={handleTypeChange}
               >
-                <MenuItem value={"1"}>cambio</MenuItem>
-                <MenuItem value={"2"}>liuyi</MenuItem>
+                <MenuItem value={"1"}>Web2</MenuItem>
+                <MenuItem value={"2"}>Web3</MenuItem>
               </Select>
-              {/* <div className="w-80 h-40 leading-[40px] text-center border border-[#ccc] rounded-[4px]">
-                $DOT
-              </div> */}
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={subType}
+                // label="选择已有域名"
+                size="small"
+                className="w-142 ml-9"
+                onChange={handleSubTypeChange}
+              >
+                <MenuItem value={"1"}>A</MenuItem>
+              </Select>
+            </div>
+            <div className="mb-32 flex">
+              <div className="w-80">记录值：</div>
+              <TextField
+                className="w-253"
+                //   id="outlined-multiline-static"
+                label="请输入记录值"
+                multiline
+                rows={4}
+                defaultValue=""
+              />
+            </div>
+            <div className="mb-32 flex items-center">
+              <div className="w-80">TTL：</div>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={ttl}
+                // label="选择已有域名"
+                size="small"
+                className="w-253"
+                onChange={handleTtlChange}
+              >
+                <MenuItem value={"1"}>10分钟</MenuItem>
+                <MenuItem value={"2"}>30分钟</MenuItem>
+                <MenuItem value={"3"}>60分钟</MenuItem>
+              </Select>
             </div>
 
             <Button
@@ -152,7 +194,7 @@ const Right: NextPage = () => {
   );
 };
 
-const Analyze: NextPage = () => {
+const AddRecord: NextPage = () => {
   return (
     <div className="flex xl:w-1280 m-auto h-screen">
       <LeftNav />
@@ -161,4 +203,4 @@ const Analyze: NextPage = () => {
   );
 };
 
-export default Analyze;
+export default AddRecord;

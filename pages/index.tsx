@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import SearchResultItem from "../components/SearchResultItem";
+import WalletBtn from "../components/WalletBtn";
 import LeftNav from "../components/LeftNav";
 import {
   getState,
@@ -17,17 +18,6 @@ import create from "zustand";
 import { useNavigate } from "react-router-dom";
 import Router from "next/router";
 const useStore = create(store);
-const WalletBtn = () => {
-  return (
-    <Button
-      variant="contained"
-      style={{ textTransform: "none" }}
-      className="bg-[#196ad4]"
-    >
-      Connect Wallet 
-    </Button>
-  );
-};
 const SearchArea = () => {
   return (
     <Select value={1} label="Age" size="small">

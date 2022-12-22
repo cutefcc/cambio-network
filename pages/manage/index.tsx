@@ -7,7 +7,6 @@ import Pagination from "@mui/material/Pagination";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SearchResultItem from "../../components/SearchResultItem";
 import LeftNav from "../../components/LeftNav";
 import WalletBtn from "../../components/WalletBtn";
 import {
